@@ -1,6 +1,7 @@
 function App(){
+  const nombre = "Sunny"
   return(
-    <h1>Hola, mis primeras lineas de react</h1>
+    <h1>Hola, mi nombre es {nombre}</h1>
   )
 }
 
