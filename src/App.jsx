@@ -1,10 +1,20 @@
+import { useState } from "react"
+
 function App(){
+
+  const [contador, setContador] = useState(0)
+
   const nombre = "Sunny"
   return(
     <>
       <h1>Hola, mi nombre es {nombre}</h1>
       <Saludo />
       <Ejemplo nombre="UsuarioJeje" />
+
+      <p>Contador: {contador}</p>
+      <button onClick={() => setContador(contador + 1)}>
+        Incrementar
+      </button>
     </>
      )
 }
