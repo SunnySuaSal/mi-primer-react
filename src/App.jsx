@@ -8,6 +8,12 @@ function App(){
 
   const frutas = ["Manzana", "Plátano", "Naranja"] //Estas listas normalmente vienen de una API
 
+  const frutasDin = [ //Si la lista va a ser dinamica, React te pide un key para identificar los elementos
+    {id: 1, nombre: "Durazno"},
+    {id: 2, nombre: "Sandía"},
+    {id: 3, nombre: "Melón"}
+  ]
+
   return(
     <>
       <h1>Hola, mi nombre es {nombre}</h1>
@@ -27,6 +33,15 @@ function App(){
           )
         }
       </ul>
+
+      <ul>
+        {
+          frutasDin.map(fruta => (
+          <li key={fruta.id}> {fruta.nombre} </li>
+          )
+          )
+        }
+      </ul> 
 
     </>
      )
