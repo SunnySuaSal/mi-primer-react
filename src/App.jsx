@@ -22,6 +22,10 @@ function App(){
     {id: 3, nombre: "Melón"}
   ]
 
+  const eliminarFruta = (frutaAEliminar) => {
+    setFrutas(frutas.filter(fruta => fruta !== frutaAEliminar))
+  }
+
   return(
     <>
       <h1>Hola, mi nombre es {nombre}</h1>
@@ -50,7 +54,14 @@ function App(){
       <FruitList
         items={frutas}
         getKey={(fruta) => fruta}
-        renderItem={(fruta) => fruta}
+        renderItem={(fruta) => (
+          <>
+            {fruta}
+            <button onClick={() => eliminarFruta(fruta)}>
+              Eliminar esta fruta
+            </button>
+          </>
+        )}
       />
 
       <FruitList
