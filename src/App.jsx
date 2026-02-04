@@ -15,6 +15,7 @@ function App(){
   ])
 
   const [nuevaFruta, setNuevaFruta] = useState("")
+  const [nuevaFrutaDin, setNuevaFrutaDin] = useState("")
 
   const agregarFruta = () => {
     if(nuevaFruta.trim() === "") return
@@ -35,15 +36,15 @@ function App(){
   const [nextId, setNextId]  = useState(4) //Se hace mejor con uuid o APIs, pero lo vemos despues
 
   const agregarFrutaDin = () => {
-    if(nuevaFruta.trim() === "") return //Esto es para que no se agreguen espacios o inputs vacios
+    if(nuevaFrutaDin.trim() === "") return //Esto es para que no se agreguen espacios o inputs vacios
 
     setFrutasDin([
       ...frutasDin,
-      {id: nextId, nombre: nuevaFruta}
+      {id: nextId, nombre: nuevaFrutaDin}
     ])
 
     setNextId(nextId + 1)
-    setNuevaFruta("") //Esto reinicia el estado para dejarlo listo pal siguiente
+    setNuevaFrutaDin("") //Esto reinicia el estado para dejarlo listo pal siguiente
   }
 
   const eliminarFrutaDin = (id) => {
@@ -90,8 +91,8 @@ function App(){
 
       <input //input solo controla texto, en este caso el nombre de la nueva fruta
         type="text" 
-        value={nuevaFruta}
-        onChange={(evento) => setNuevaFruta(evento.target.value)} //esto recibe una string siempre
+        value={nuevaFrutaDin}
+        onChange={(evento) => setNuevaFrutaDin(evento.target.value)} //esto recibe una string siempre
         placeholder="Nueva fruta Din"
       />
       <button
