@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-function App(){
+import Counter from "./components/Counter"
 
-  const [contador, setContador] = useState(0)
+function App(){
 
   const nombre = "Sunny"
 
@@ -20,29 +20,19 @@ function App(){
       <Saludo />
       <Ejemplo nombre="UsuarioJeje" />
 
-      <p>Contador: {contador}</p>
-      <button onClick={() => setContador(contador + 1)}>
-        Incrementar
-      </button>
+      <Counter />
+
+    <ul>
+  {frutas.map(fruta => (
+    <li key={fruta}>{fruta}</li>
+  ))}
+</ul> 
 
       <ul>
-        {
-          frutas.map(fruta => (
-            <li>{fruta}</li>
-            )
-          )
-        }
-      </ul>
-
-      <ul>
-        {
-          frutasDin.map(fruta => (
-          <li key={fruta.id}> {fruta.nombre} </li>
-          )
-          )
-        }
-      </ul> 
-
+  {frutasDin.map(fruta => (
+    <li key={fruta.id}>{fruta.nombre}</li>
+  ))}
+</ul>
     </>
      )
 }
