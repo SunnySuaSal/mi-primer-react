@@ -59,6 +59,8 @@ function App(){
 
       <Counter />
 
+      <p>La siguiente lista no debería ser dinámica, por atrás no tiene id, pero
+      funciona como experimento.</p>
 
       <input 
         type="text" 
