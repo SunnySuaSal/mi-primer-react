@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import Counter from "./components/Counter"
 import { Saludo, Ejemplo } from "./components/SimpleComponents"
 import FruitList from "./components/FruitList"
+import UserList from "./components/UserList"
 
 function App(){
 
@@ -50,20 +51,6 @@ function App(){
   const eliminarFrutaDin = (id) => {
     setFrutasDin(frutasDin.filter(fruta => fruta.id !== id))
   }
-
-  const [usuarios, setUsuarios] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-    .then(res => res.json())
-    .then(data => {
-        setUsuarios(data)
-        setLoading(false)
-      })
-  }, []
-
-  )
 
   return(
     <>
@@ -131,16 +118,8 @@ function App(){
         )}
       />
 
-      <h1>Vamos a probar una API REST</h1>
-      {loading && <p>Cargando usuarios...</p>}
 
-      <ul>
-        {usuarios.map(usuario => (
-        <li>
-          {usuario.name} - {usuario.email}
-        </li>
-        ))}
-      </ul>
+      <UserList />
 
     </>
   )
