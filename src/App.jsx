@@ -2,6 +2,7 @@ import { useState } from "react"
 
 import Counter from "./components/Counter"
 import { Saludo, Ejemplo } from "./components/SimpleComponents"
+import FruitList from "./components/FruitList"
 
 function App(){
 
@@ -23,19 +24,20 @@ function App(){
 
       <Counter />
 
-    <ul>
-  {frutas.map(fruta => (
-    <li key={fruta}>{fruta}</li>
-  ))}
-</ul> 
+      <FruitList
+        items={frutas}
+        getKey={(fruta) => fruta}
+        renderItem={(fruta) => fruta}
+      />
 
-      <ul>
-  {frutasDin.map(fruta => (
-    <li key={fruta.id}>{fruta.nombre}</li>
-  ))}
-</ul>
+      <FruitList
+        items={frutasDin}
+        getKey={(fruta) => fruta.id}
+        renderItem={(fruta) => fruta.nombre}
+      />
+
     </>
-     )
+  )
 }
 
 
