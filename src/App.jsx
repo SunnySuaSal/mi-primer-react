@@ -8,7 +8,13 @@ function App(){
 
   const nombre = "Sunny"
 
-  const frutas = ["Manzana", "Plátano", "Naranja"] //Estas listas normalmente vienen de una API
+  const [frutas, setFrutas] = useState([
+    "Manzana",
+    "Platano",
+    "Naranja"
+  ])
+
+  const [nuevaFruta, setNuevaFruta] = useState("")
 
   const frutasDin = [ //Si la lista va a ser dinamica, React te pide un key para identificar los elementos
     {id: 1, nombre: "Durazno"},
@@ -23,6 +29,23 @@ function App(){
       <Ejemplo nombre="UsuarioJeje" />
 
       <Counter />
+
+
+      <input 
+        type="text" 
+        value={nuevaFruta}
+        onChange={(evento) => setNuevaFruta(evento.target.value)}
+        placeholder="Nueva fruta"
+      />
+      <button
+        onClick={() => {
+          if(nuevaFruta.trim() === "") return
+          setFrutas([...frutas, nuevaFruta])
+          setNuevaFruta("")
+        }}
+      >
+        Agregar fruta
+      </button>
 
       <FruitList
         items={frutas}
