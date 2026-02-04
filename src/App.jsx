@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import Counter from "./components/Counter"
+import { Saludo, Ejemplo } from "./components/SimpleComponents"
 
 function App(){
 
@@ -37,16 +38,5 @@ function App(){
      )
 }
 
-function Saludo(){
-  return (
-    <p>Este es un componente</p>
-  )
-}
-
-function Ejemplo(props){
-  return (
-    <h2>Usando props, se que tu nombre de usuario es {props.nombre}</h2>
-  )
-}
 
 export default App
