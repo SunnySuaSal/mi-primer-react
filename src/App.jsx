@@ -16,14 +16,38 @@ function App(){
 
   const [nuevaFruta, setNuevaFruta] = useState("")
 
-  const frutasDin = [ //Si la lista va a ser dinamica, React te pide un key para identificar los elementos
-    {id: 1, nombre: "Durazno"},
-    {id: 2, nombre: "Sandía"},
-    {id: 3, nombre: "Melón"}
-  ]
+  const agregarFruta = () => {
+    if(nuevaFruta.trim() === "") return
+    setFrutas([...frutas, nuevaFruta])
+    setNuevaFruta("")
+  }
 
   const eliminarFruta = (frutaAEliminar) => {
     setFrutas(frutas.filter(fruta => fruta !== frutaAEliminar))
+  }
+
+  const [frutasDin, setFrutasDin] = useState([ //Si la lista va a ser dinamica, React te pide un key para identificar los elementos
+    {id: 1, nombre: "Durazno"},
+    {id: 2, nombre: "Sandía"},
+    {id: 3, nombre: "Melón"}
+  ])
+
+  const [nextId, setNextId]  = useState(4) //Se hace mejor con uuid o APIs, pero lo vemos despues
+
+  const agregarFrutaDin = () => {
+    if(nuevaFruta.trim() === "") return //Esto es para que no se agreguen espacios o inputs vacios
+
+    setFrutasDin([
+      ...frutasDin,
+      {id: nextId, nombre: nuevaFruta}
+    ])
+
+    setNextId(nextId + 1)
+    setNuevaFruta("") //Esto reinicia el estado para dejarlo listo pal siguiente
+  }
+
+  const eliminarFrutaDin = (id) => {
+    setFrutasDin(frutasDin.filter(fruta => fruta.id !== id))
   }
 
   return(
@@ -64,10 +88,30 @@ function App(){
         )}
       />
 
+      <input //input solo controla texto, en este caso el nombre de la nueva fruta
+        type="text" 
+        value={nuevaFruta}
+        onChange={(evento) => setNuevaFruta(evento.target.value)} //esto recibe una string siempre
+        placeholder="Nueva fruta Din"
+      />
+      <button
+        onClick={agregarFrutaDin}
+      >
+        Agregar fruta Din
+      </button>
+
+
       <FruitList
         items={frutasDin}
         getKey={(fruta) => fruta.id}
-        renderItem={(fruta) => fruta.nombre}
+        renderItem={(fruta) => (
+          <>
+            {fruta.nombre}
+            <button onClick={() => eliminarFrutaDin(fruta.id)}>
+              Eliminar esta fruta.
+            </button>
+          </>
+        )}
       />
 
     </>
