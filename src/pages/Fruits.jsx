@@ -1,5 +1,6 @@
 import { useState } from "react"
 import FruitList from "../components/FruitList"
+import "./Fruits.css"
 
 function Fruits(){
   const [frutas, setFrutas] = useState([
@@ -28,19 +29,21 @@ function Fruits(){
   }
 
   return (
-    <>
+    <div className="fruits-page">
       <h1>Lista dinámica de frutas</h1>
       
-      <input
-        type="text"
-        value={nuevaFruta}
-        onChange={(evento) => setNuevaFruta(evento.target.value)}
-        placeholder="Nueva fruta"
-      />
+      <div className="fruit-form">
+        <input
+          type="text"
+          value={nuevaFruta}
+          onChange={(evento) => setNuevaFruta(evento.target.value)}
+          placeholder="Nueva fruta"
+        />
 
-      <button onClick={agregarFruta}>
-        Agregar fruta
-      </button>
+        <button onClick={agregarFruta}>
+          Agregar fruta
+        </button>
+      </div>
 
       <FruitList 
         items={frutas}
@@ -54,7 +57,7 @@ function Fruits(){
         </>
         )}
       />
-    </>
+    </div>
   )
 
 }

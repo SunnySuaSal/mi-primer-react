@@ -1,8 +1,8 @@
 function FruitList({ items, renderItem, getKey }){
   return(
-    <ul>
+    <ul className="fruit-list">
       {items.map(item => (
-      <li key={getKey(item)}>
+      <li className="fruit-card" key={getKey(item)}>
         {renderItem(item)}
       </li>
       ))}
