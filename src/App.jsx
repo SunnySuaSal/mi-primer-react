@@ -3,7 +3,10 @@ import { useState, useEffect } from "react"
 import Counter from "./components/Counter"
 import { Saludo, Ejemplo } from "./components/SimpleComponents"
 import FruitList from "./components/FruitList"
-import UserList from "./components/UserList"
+
+import { Routes, Route, Link } from "react-router-dom"
+import Home from "./pages/Home"
+import Users from "./pages/Users"
 
 function App(){
 
@@ -119,7 +122,15 @@ function App(){
       />
 
 
-      <UserList />
+      <nav>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/users">Usuarios</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/users" element={<Users />} />
+      </Routes>
 
     </>
   )
