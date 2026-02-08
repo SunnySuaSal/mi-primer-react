@@ -1,60 +1,43 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import FruitList from "../components/FruitList"
 import "./Fruits.css"
 
 function Fruits(){
-  const [frutas, setFrutas] = useState([
-    { id: 1, nombre: "Durazno" },
-    { id: 2, nombre: "Sandía" },
-    { id: 3, nombre: "Melón" }
-  ])
 
-  const [nuevaFruta, setNuevaFruta] = useState("")
-  const [nextId, setNextId] = useState(4)
+  const [frutas, setFrutas] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const agregarFruta = () => {
-    if(nuevaFruta.trim() === "") return
+  useEffect(() => {
+    fetch("/api/fruits")
+    .then(res => {
+        if(!res.ok) {
+          throw new Error("Error al cargar frutas")
+        }
+        return res.json()
+      })
+    .then(data => {
+        setFrutas(data)
+        setLoading(false)
+      })
+    .catch(err => {
+        setError(err.message)
+        setLoading(false)
+      })
+  }, []) //solo una vez (on mount)
 
-    setFrutas([
-      ...frutas,
-      {id: nextId, nombre: nuevaFruta}
-    ])
-
-    setNextId(nextId + 1)
-    setNuevaFruta("")
-  }
-
-  const eliminarFruta = (id) => {
-    setFrutas(frutas.filter(fruta => fruta.id !== id))
-  }
+  if(loading) return <p>Cargando frutas...</p>
+  if(error) return <p>Error: {error}</p>
 
   return (
     <div className="fruits-page">
-      <h1>Lista dinámica de frutas</h1>
-      
-      <div className="fruit-form">
-        <input
-          type="text"
-          value={nuevaFruta}
-          onChange={(evento) => setNuevaFruta(evento.target.value)}
-          placeholder="Nueva fruta"
-        />
+      <h1>Frutas desde la base de datos</h1>
 
-        <button onClick={agregarFruta}>
-          Agregar fruta
-        </button>
-      </div>
-
-      <FruitList 
+      <FruitList
         items={frutas}
         getKey={(fruta) => fruta.id}
         renderItem={(fruta) => (
-        <>
-          {fruta.nombre}
-          <button onClick={() => eliminarFruta(fruta.id)}>
-            Eliminar
-          </button>
-        </>
+        <span>{fruta.nombre}</span>
         )}
       />
     </div>
